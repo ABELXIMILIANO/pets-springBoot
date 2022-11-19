@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<div th:fragment="formulario_repetido">
+
+    <form th:action="@{''}" th:object="${report}" method="post" class="mt-2" enctype="multipart/form-data">
+
+    <div class="mb-2">
+        <label for="nombreMascota" class="form-label">Nombre de mascota</label>
+        <input type="text" class="form-control" id="nombreMascota" placeholder="Nombre de mascota"
+               th:field="*{nombreMascota}" th:errorclass="is-invalid">
+
+        <div th:errors="*{nombreMascota}" th:if="${#fields.hasErrors('nombreMascota')}"
+             class="invalid-feedback">
+        </div>
+
+    </div>
+
+    <div class="mb-2">
+        <label for="edad" class="form-label">Edad</label>
+        <input type="text" maxlength="9" class="form-control" id="edad" placeholder="Edad"
+               onKeypress="if (event.keyCode < 45 || event.keyCode > 57) event.returnValue = false;"
+               th:field="*{edad}" th:errorclass="is-invalid">
+
+        <div th:errors="*{edad}" th:if="${#fields.hasErrors('edad')}"
+             class="invalid-feedback">
+        </div>
+    </div>
+
+    <div class="mb-2">
+        <label for="imagen">Seleccione Imagen</label>
+        <input type="file" class="form-control" id="imagen" accept="image/*"
+               th:field="*{imagen}" th:errorclass="is-invalid">
+        <div th:errors="*{imagen}" th:if="${#fields.hasErrors('imagen')}"
+             class="invalid-feedback">
+        </div>
+    </div>
+
+    <br>
+    <div style="float: right;">
+        <a href="/admin/reportes" class="btn btn-warning">Cancelar</a>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+
+</form>
+
+</div>
+
+
+
+</body>
+</html>

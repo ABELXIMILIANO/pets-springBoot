@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master.html}">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <title>Editar Mascota Desaparecida</title>
+</head>
+<body background="/img/bg.png">
+
+
+<!--- Form-->
+<div class="container mt-5" layout:fragment="contenido_dinamico">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-6 col-lg-4">
+
+            <h4>Editar Mascota Desaparecida</h4>
+
+            <div th:insert="admin/_form :: formulario_repetido"></div>
+
+        </div>
+    </div>
+</div>
+<!--- End Form-->
+
+
+</body>
+</html>

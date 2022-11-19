@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio de Sesion</title>
+</head>
+<body>
+
+<div layout:fragment="contenido_dinamico" class="container my-5">
+
+<div class="container">
+    <div class="row justify-content-center">
+      <!--  <div style="background-color :	#17a2b8" class="row justify-content-center"> -->
+
+        <div class="col-md-6 col-lg-4">
+
+            <div class="bg-white shadow rounded p-5" style="border-width: 1px; border-style: solid; border-color: black;">
+                <h3>Inicio de sesión</h3>
+
+                <div class="alert alert-danger my-3" th:if="${param.error}">
+                    El email o la contraseña son incorrectas.
+                </div>
+
+                <div class="alert alert-success my-3" th:if="${param.registroExitoso}">
+                    Te has registrado correctamente.
+                </div>
+
+                <form th:action="@{''}" method="post" class="mt-5">
+                    <div class="mb-2">
+                        <label for="email">Email</label>
+                        <input id="email" type="email" class="form-control" name="username" placeholder="Email">
+                    </div>
+
+                    <div class="mb-2">
+                        <label for="password">Contraseña</label>
+                        <input id="password" type="password" class="form-control" name="password" placeholder="Contraseña">
+                    </div>
+
+                    <div class="mb-2">
+                        <label>
+                            <input id="rememberMe" type="checkbox" class="form-checkbox" name="remember-me">
+                            Recordarme
+                        </label>
+                    </div>
+                    <button class="btn btn-outline-dark">
+                        Ingresar
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master.html}">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <title>Mascotas Perdidas</title>
+
+
+    <div layout:fragment="styles">
+        <style>
+            .banner {
+                background: url(/img/principal.jpg) center no-repeat;
+                min-height: 500px;
+                background-size: cover;
+                position:relative;
+                z-index:-2;
+            }
+            .banner .overlay {
+                background: rgba(0,0,0,0.25);
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                z-index: -1;
+            }
+
+        </style>
+    </div>
+
+</head>
+<body background="/img/bg.png">
+
+<div layout:fragment="contenido_dinamico">
+
+    <div class="banner">
+        <div class="overlay"></div>
+        <div class="container text-white">
+            <h1 class="display-2">Mascotas Perdidas</h1>
+            <p>
+                Pagina Gratuita Para Reportar a Tu Mascota.
+            </p>
+            <p>
+                Ponte en contacto con nosotros para generar un REPORTE.
+            </p>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <h3 class="text-primary">Ultimas mascotas Desaparecidas</h3>
+
+
+        <div class="row">
+            <div th:each="report : ${ultimosReports}" th:object="${report}" class="col-md-4 col-lg-3 mb-3">
+
+                <div class="card shadow h-100">
+                    <img th:src="@{/media/{rutaImagen}(rutaImagen=*{rutaImagen})}" class="card-img-top"
+                         th:alt="*{nombreMascota}">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre: [[*{nombreMascota}]]</h5>
+                        <div class="card-text">
+                            <div>
+                                Edad: [[*{edad}]] años
+                            </div>
+                        </div>
+
+                        <div class="d-grid">
+                            <a th:href="@{/repor/{id}(id=*{id})}" class="btn btn-outline-primary btn-lg btn-block">
+                                Ver detalles
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${report.nombreMascota}]]</title>
+</head>
+<body>
+
+<div layout:fragment="contenido_dinamico">
+<div class="container my-5" th:object="${report}">
+
+    <h3 class="text-dark mb-3">Hola Me llamo: [[*{nombreMascota}]]</h3>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <img th:src="@{/media/{rutaImagen}(rutaImagen=*{rutaImagen})}" class="card-img-top"
+                 th:alt="*{nombreMascota}">
+        </div>
+
+        <div class="col-md-6">
+            <p>
+              Nombre: [[*{nombreMascota}]]
+            </p>
+
+            <p>
+               Edad: [[*{edad}]] años
+            </p>
+
+        </div>
+
+    </div>
+    <div class="mt-3">
+    <a  href="javascript:history.go(-1);">
+        <button class="btn btn-outline-warning">Regresar</button>
+    </a>
+    </div>
+
+</div>
+</div>
+
+</body>
+</html>

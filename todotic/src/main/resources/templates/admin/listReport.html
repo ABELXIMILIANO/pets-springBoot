@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master.html}">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <title>Mascotas Perdidas</title>
+</head>
+<body background="/img/bg.png">
+
+
+<div class="container mt-5" layout:fragment="contenido_dinamico">
+
+    <h2>Administrar Reportes</h2>
+
+    <!--Nuevo Reporte-->
+    <div style="float: right;">
+        <a href="/admin/reportes/newReport" class="btn btn-outline-primary">
+            Nuevo Reporte
+        </a>
+    </div>
+    <!--Nuevo Reporte-->
+
+    <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Buscar Mascota por Nombre" aria-label="Buscar" name="nombreMascota" th:value="${param.nombreMascota}">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+    </form>
+    <!--- Table-->
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Nombre</th>
+            <th>Edad</th>
+            <th>Opciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="report : ${reports}" th:object="${report}">
+            <td>
+                <a th:href="@{/media/{rutaImagen}(rutaImagen = *{rutaImagen})}" data-fancybox>
+                <img th:src="@{/media/{rutaImagen}(rutaImagen = *{rutaImagen})}" alt="Imagen" width="75"
+                     th:if="*{rutaImagen ne null}">
+                </a>
+            </td>
+            <td th:text="*{nombreMascota}"></td>
+            <td th:text="*{edad+' años'}"></td>
+            <td>
+                <div class="">
+                <a th:href="@{/admin/reportes/editReport/{id}/(id=*{id})}" class="btn btn-outline-primary text-dark" title="Editar Reporte">
+                    <i class="fas fa-pencil-alt"></i>
+                </a>
+                <a onclick="deleteReport(this)" href="#" class="btn btn-outline-danger text-dark" title="Eliminar Reporte">
+                    <i class="fas fa-trash-alt"></i>
+                </a>
+                <form th:action="@{/admin/reportes/deleteReport/{id}/(id=*{id})}" method="post" class="d-none" ></form>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+  <div class="d-flex justify-content-center" th:with="page=${reports}">
+      <nav>
+          <div sd:pagination-summary="">info</div>
+          <ul class="pagination mt-1" sd:pagination="full">
+             </ul>
+      </nav>
+  </div>
+
+
+</div>
+
+<div th:fragment="fragmenteliminar">
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master.html}">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <title>Todas las Mascotas Perdidas</title>
+
+</head>
+<body background="/img/bg.png">
+
+<div layout:fragment="contenido_dinamico">
+
+    <div class="container mt-5">
+        <h3 class="text-primary">Todas las Mascotas Desaparecidas</h3>
+
+
+        <div class="row">
+            <div th:each="report : ${reports}" th:object="${report}" class="col-md-4 col-lg-3 mb-3">
+
+                <div class="card shadow h-100">
+                    <img th:src="@{/media/{rutaImagen}(rutaImagen=*{rutaImagen})}" class="card-img-top"
+                         th:alt="*{nombreMascota}">
+                    <div class="card-body">
+                        <h5 class="card-title">Nombre: [[*{nombreMascota}]]</h5>
+                        <div class="card-text">
+                            <div>
+                                Edad: [[*{edad}]] años
+                            </div>
+                        </div>
+
+                        <div class="d-grid">
+                            <a th:href="@{/repor/{id}(id=*{id})}" class="btn btn-outline-primary btn-lg btn-block">
+                                Ver detalles
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <div class="d-flex justify-content-center" th:with="page=${reports}">
+            <nav>
+                <div sd:pagination-summary="">info</div>
+                <ul class="pagination mt-1" sd:pagination="full">
+                </ul>
+            </nav>
+        </div>
+
+
+
+    </div>
+
+</div>
+
+</body>
+</html>

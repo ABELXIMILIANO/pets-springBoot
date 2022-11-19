@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/0b1f9e314d.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css"/>
+
+    <title>MascotasPerdidas</title>
+
+    <div layout:fragment="styles" th:remove="tag"></div>
+
+</head>
+
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-info">
+    <img src="/img/paws.png" width="60" height="60">
+    <a class="navbar-brand"><strong> &nbsp; Mascotas Perdidas </strong></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Inicio <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/reports">Todas Las Mascotas <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="nav-link" href="/admin/reportes/">Administra Reportes <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="nav-link" href="/registro">Nuevo usuario <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/contacto">Contacto<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+
+
+        <div sec:authorize="!isAuthenticated()">
+            <a ype="button" class="btn btn-outline-dark" href="/login">
+                Iniciar sesión
+            </a>
+        </div>
+
+
+        <div class="" sec:authorize="isAuthenticated()">
+            <a>Hola:</a>
+            <a sec:authentication="principal.nombre"> </a>
+            <a href="/logout" type="button" class="btn btn-outline-dark">Salir </a>
+
+        </div>
+
+
+
+    </div>
+</nav>
+
+<!-- Mensaje de Exito -->
+<div class="container">
+<div th:if="${msgExito ne null}" class="alert alert-success alert-dismissible fade show mt-3" role="alert" >
+    <strong> [[${msgExito}]]</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+</div>
+<!-- End Mensaje de Exito -->
+
+<div layout:fragment="contenido_dinamico">
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js"></script>
+
+<div layout:fragment="fragmenteliminar" th:remove="tag">
+    <script>
+        function deleteReport(elem) {
+            var ok = confirm('¿Quieres Eliminar este Reporte');
+            if (ok) {
+                elem.nextElementSibling.submit();
+            }
+        }
+    </script>
+
+</div>
+
+</body>
+</html>
